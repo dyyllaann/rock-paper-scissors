@@ -17,20 +17,18 @@ function computerPlay() {
 
 function playRound(playerSelection, computerSelection) {
     if (playerSelection == computerSelection) {
-        console.log("You both chose " + playerSelection + ".");
-        return "Draw!"
+        return "You both chose " + playerSelection + ".\nDraw!"
     } else if (
         (playerSelection == "rock" && computerSelection == "scissors") ||
         (playerSelection == "paper" && computerSelection == "rock") ||
         (playerSelection == "scissors" && computerSelection == "paper")
     ) {
         playerScore++;
-        console.log(capitalize(playerSelection) + " beats " + computerSelection + ".");
-        return "You win!";
+        return capitalize(playerSelection) + " beats " + computerSelection + ".\nYou win!";
+        // return "You win!";
     } else {
         computerScore++;
-        console.log(capitalize(computerSelection) + " beats " + playerSelection + ".");
-        return "You lose!";
+        return capitalize(computerSelection) + " beats " + playerSelection + ".\nYou lose!";
     }
 };
 
@@ -39,17 +37,17 @@ function game() {
     while (i < 5) {
         const playerSelection = prompt("What do you choose?").toLocaleLowerCase();
         const computerSelection = computerPlay();
-        console.log(playRound(playerSelection, computerSelection));
-        console.log("Player: " + playerScore);
-        console.log("Computer: " + computerScore, "\n", "\n");
-        i++;
+        alert(playRound(playerSelection, computerSelection) + "\nPlayer: " + playerScore + "\nComputer: " + computerScore);
+        if (playerSelection != computerSelection) {
+            i++;
+        }
     }
 
     if (playerScore > computerScore) {
-        console.log("You won the game!");
+        alert("You won the game!");
     } else if (playerScore < computerScore) {
-        console.log("You lost the game!");
-    } else console.log("It's a draw!");
+        alert("You lost the game!");
+    } else alert("It's a draw!");
 
     return "GAME OVER";
 }
