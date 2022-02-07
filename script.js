@@ -1,4 +1,5 @@
 const sfx = new Audio('SFX_PRESS_AB.wav');
+const sfxHit = new Audio('SFX_INTRO_CRASH.wav');
 cpuHealth = 5;
 playerHealth = 5;
 let running = true;
@@ -30,10 +31,12 @@ function game() {
 			(playerSelection == "paper" && computerSelection == "rock") ||
 			(playerSelection == "scissors" && computerSelection == "paper")
 		) {
+            sfxHit.play();
 			cpuHealth--;
             cpuHealthBar.style.width = 266 / 5 * cpuHealth + "px";
 			return (capitalize(playerSelection) + " beats " + computerSelection + ".\n\nYou win!");
 		} else {
+            sfxHit.play();
 			playerHealth--;
             playerHealthBar.style.width = (266 / 5) * playerHealth + "px";
             currentHealth.innerHTML = playerHealth;
@@ -65,11 +68,13 @@ const checkKey = function (e) {
 
     if (running == true) {
         if (e.keyCode == "38" && index > 0) {
+            sfx.currentTime = 0;
             sfx.play();
             options[index].classList.remove("active");
             index--;
             options[index].classList.add("active");
         } else if (e.keyCode == "40" && index < options.length - 1) {
+            sfx.currentTime = 0;
             sfx.play();
             options[index].classList.remove("active");
             index++;
@@ -78,6 +83,7 @@ const checkKey = function (e) {
 
         if (e.keyCode == "39") {
             running = false;
+            sfx.currentTime = 0;
             sfx.play();
             const choices = document.querySelectorAll(".choice");
             const dialog = document.getElementById("dialog");
